@@ -7,9 +7,9 @@
 #include <string.h>
 #include <omp.h>
 
-#define START  1000000
-#define STEP   1000000
-#define END   10000000
+#define START  100000
+#define STEP   100000
+#define END   1000000
 
 #define DIGITS 1000
 
