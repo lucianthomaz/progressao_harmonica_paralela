@@ -14,16 +14,15 @@
 #define DIGITS 1000
 
 void sum(char* output, const long unsigned int d, const long unsigned int n) {
-    int id , numThreads ;
-    id = omp_get_thread_num () ;
-    numThreads = omp_get_num_threads () ;
-    printf("Num thread: %d, total threads: %d", id, numThreads)
+    int id , numThreads;
+    id = omp_get_thread_num();
+    numThreads = omp_get_num_threads();
+    printf("Num thread: %d, total threads: %d", id, numThreads);
     long unsigned int digit, i, remainder, div, mod;
     long unsigned int digits[d + 11];
     for (digit = 0; digit < d + 11; ++digit) {
         digits[digit] = 0;
     }
-    #pragma omp parallel for
     for (i = 1; i <= n; ++i) {
         remainder = 1;
         for (digit = 0; digit < d + 11 && remainder; ++digit) {
@@ -33,7 +32,6 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
             remainder = mod * 10;
         }
     }
-    #pragma opm parallel for
     for (i = d + 11 - 1; i > 0; --i) {
         digits[i - 1] += digits[i] / 10;
         digits[i] %= 10;
@@ -41,7 +39,6 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
     if (digits[d + 1] >= 5) {
         ++digits[d];
     }
-    #pragma opm parallel for
     for (i = d; i > 0; --i) {
         digits[i - 1] += digits[i] / 10;
         digits[i] %= 10;
