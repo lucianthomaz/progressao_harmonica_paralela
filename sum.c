@@ -19,6 +19,7 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
     for (digit = 0; digit < d + 11; ++digit) {
         digits[digit] = 0;
     }
+    #pragma opm parallel for
     for (i = 1; i <= n; ++i) {
         remainder = 1;
         for (digit = 0; digit < d + 11 && remainder; ++digit) {
@@ -28,6 +29,7 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
             remainder = mod * 10;
         }
     }
+    #pragma opm parallel for
     for (i = d + 11 - 1; i > 0; --i) {
         digits[i - 1] += digits[i] / 10;
         digits[i] %= 10;
@@ -35,6 +37,7 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
     if (digits[d + 1] >= 5) {
         ++digits[d];
     }
+    #pragma opm parallel for
     for (i = d; i > 0; --i) {
         digits[i - 1] += digits[i] / 10;
         digits[i] %= 10;
@@ -50,6 +53,7 @@ int main() {
     long unsigned int n;
     double start, finish;
     char output[DIGITS + 10]; // extra chars to avoid error
+    #pragma opm parallel for
     for (n=START; n<=END; n+=STEP) {
         start = omp_get_wtime();
         sum(output, DIGITS, n);
