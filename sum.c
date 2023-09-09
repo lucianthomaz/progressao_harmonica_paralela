@@ -15,9 +15,6 @@
 
 void sum(char* output, const long unsigned int d, const long unsigned int n) {
     int id , numThreads;
-    id = omp_get_thread_num();
-    numThreads = omp_get_num_threads();
-    printf("Num thread: %d, total threads: %d\n", id, numThreads);
     long unsigned int digit, i, remainder, div, mod;
     long unsigned int digits[d + 11];
     for (digit = 0; digit < d + 11; ++digit) {
@@ -55,7 +52,7 @@ int main() {
     double start, finish, overall_start, overall_finish;
     char output[DIGITS + 10]; // extra chars to avoid error
     overall_start = omp_get_wtime();
-    #pragma omp parallel for private(n)
+    // #pragma omp parallel for private(n)
     for (n=START; n<=END; n+=STEP) {
         start = omp_get_wtime();
         sum(output, DIGITS, n);
