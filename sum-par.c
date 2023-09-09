@@ -19,7 +19,7 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
     for (digit = 0; digit < d + 11; ++digit) {
         digits[digit] = 0;
     }
-    #pragma omp parallel for private(i)
+//    #pragma omp parallel for private(i)
     for (i = 1; i <= n; ++i) {
         remainder = 1;
         for (digit = 0; digit < d + 11 && remainder; ++digit) {
@@ -42,7 +42,7 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
     }
     sprintf(output,"%lu.",digits[0]);
     unsigned long int t = strlen(output);
-    #pragma omp parallel for private(i)
+//    #pragma omp parallel for private(i)
     for (i = 1; i <= d; ++i)
         output[t++] = digits[i]+'0';
     output[t] = '\0';
@@ -50,7 +50,8 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
 
 int main(int argc, char *argv[]) {
     long unsigned int n;
-    int num_threads = argv[1]
+    int num_threads;
+    sscanf (argv[1],"%d",&num_threads);
     double start, finish, overall_start, overall_finish;
     char output[DIGITS + 10]; // extra chars to avoid error
     overall_start = omp_get_wtime();
