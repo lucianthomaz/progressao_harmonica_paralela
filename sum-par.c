@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
     double start, finish, overall_start, overall_finish;
     char output[DIGITS + 10]; // extra chars to avoid error
     overall_start = omp_get_wtime();
-    omp_set_num_threads(2);
+    omp_set_num_threads(num_threads);
     #pragma omp parallel for private(n)
     for (n=START; n<=END; n+=STEP) {
         start = omp_get_wtime();
