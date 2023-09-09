@@ -14,7 +14,6 @@
 #define DIGITS 1000
 
 void sum(char* output, const long unsigned int d, const long unsigned int n) {
-    int id , numThreads;
     long unsigned int digit, i, remainder, div, mod;
     long unsigned int digits[d + 11];
     for (digit = 0; digit < d + 11; ++digit) {
@@ -49,11 +48,13 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
     output[t] = '\0';
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     long unsigned int n;
+    int num_threads = argv[1]
     double start, finish, overall_start, overall_finish;
     char output[DIGITS + 10]; // extra chars to avoid error
     overall_start = omp_get_wtime();
+    omp_set_num_threads(2);
     #pragma omp parallel for private(n)
     for (n=START; n<=END; n+=STEP) {
         start = omp_get_wtime();
