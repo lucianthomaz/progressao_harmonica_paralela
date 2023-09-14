@@ -45,7 +45,7 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
     }
     sprintf(output,"%lu.",digits[0]);
     unsigned long int t = strlen(output);
-    #pragma omp parallel for
+    //#pragma omp parallel for
     for (i = 1; i <= d; ++i)
         output[t++] = digits[i]+'0';
     output[t] = '\0';
