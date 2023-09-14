@@ -30,6 +30,7 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
             remainder = mod * 10;
         }
     }
+    #pragma omp parallel for
     for (i = d + 11 - 1; i > 0; --i) {
         digits[i - 1] += digits[i] / 10;
         digits[i] %= 10;
@@ -37,6 +38,7 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
     if (digits[d + 1] >= 5) {
         ++digits[d];
     }
+    #pragma omp parallel for
     for (i = d; i > 0; --i) {
         digits[i - 1] += digits[i] / 10;
         digits[i] %= 10;
@@ -55,9 +57,7 @@ int main(int argc, char *argv[]) {
     sscanf (argv[1],"%d",&num_threads);
     double start, finish, overall_start, overall_finish;
     char output[DIGITS + 10]; // extra chars to avoid error
-    overall_start = omp_get_wtime();
     omp_set_num_threads(num_threads);
-    #pragma omp parallel for private(n)
     for (n=START; n<=END; n+=STEP) {
         start = omp_get_wtime();
         sum(output, DIGITS, n);
@@ -65,7 +65,5 @@ int main(int argc, char *argv[]) {
         fprintf(stdout,"%s\n",output);
         fprintf(stderr,"%lu %lf\n",n,finish-start);
     }
-    overall_finish = omp_get_wtime();
-    fprintf(stderr,"Overall time: %lf\n",overall_finish-overall_start);
     return 0;
 }

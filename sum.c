@@ -51,8 +51,6 @@ int main() {
     long unsigned int n;
     double start, finish, overall_start, overall_finish;
     char output[DIGITS + 10]; // extra chars to avoid error
-    overall_start = omp_get_wtime();
-    // #pragma omp parallel for private(n)
     for (n=START; n<=END; n+=STEP) {
         start = omp_get_wtime();
         sum(output, DIGITS, n);
@@ -60,7 +58,5 @@ int main() {
         fprintf(stdout,"%s\n",output);
         fprintf(stderr,"%lu %lf\n",n,finish-start);
     }
-    overall_finish = omp_get_wtime();
-    fprintf(stderr,"Overall time: %lf\n",overall_finish-overall_start);
     return 0;
 }
