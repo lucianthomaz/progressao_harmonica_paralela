@@ -30,7 +30,7 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
             remainder = mod * 10;
         }
     }
-    #pragma omp parallel for
+    // #pragma omp parallel for
     for (i = d + 11 - 1; i > 0; --i) {
         digits[i - 1] += digits[i] / 10;
         digits[i] %= 10;
@@ -38,7 +38,7 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
     if (digits[d + 1] >= 5) {
         ++digits[d];
     }
-    #pragma omp parallel for
+    // #pragma omp parallel for
     for (i = d; i > 0; --i) {
         digits[i - 1] += digits[i] / 10;
         digits[i] %= 10;
