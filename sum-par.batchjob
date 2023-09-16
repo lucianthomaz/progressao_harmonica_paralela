@@ -6,4 +6,4 @@
 #SBATCH --no-requeue
 #SBATCH -o %x.%j.out # formato do nome do arquivo de saída
 #SBATCH -D /home/pp03009/openmp/progressao_harmonica_paralela # diretório
-./sum-par 8 > saida-par8.txt 2> tempos-par8.txt
+./sum-par 16 > saida-par16.txt 2> tempos-par16.txt
